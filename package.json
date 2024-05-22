@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "express-async-handler": "^1.2.0",
+    "mailgen": "^2.0.28",
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "cypress": "^13.8.1",
+    "cypress-file-upload": "^5.0.8"
+  }
+}

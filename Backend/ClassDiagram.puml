@@ -1,0 +1,58 @@
+@startuml 
+left to right direction
+package "carRental"{
+    class "<<Application>>\nCarService" as carRental{}
+
+    class "<<Resource>>\nCars" as ResourceCars{
+        <<GET>> +getCars():Car
+        <<POST>> +createCar():Car
+    }
+
+    class "<<Resource>>\nCar" as ResourceCar {
+        <<GET>> +getCar(): Car
+        <<PUT>> +updateCar(): Car
+        <<DELETE>> +deleteCar(): void
+    }
+
+    class "<<Representation>>\nCar" as RepresentationCar {
+        -Brand
+        -Model
+        -Year
+        -Color
+        -FeePerDay
+        -LicensePlate
+    }
+
+    '________
+
+
+
+    class "<<Resource>>\nBookings" as ResourceBookings{
+        <<GET>> +getBookings():Booking
+        <<POST>> +createBooking():Booking
+    }
+
+    class "<<Resource>>\nBooking" as ResourceBooking {
+        <<GET>> +getBooking(): Booking
+        <<PUT>> +updateBooking(): Booking
+        <<DELETE>> +deleteBooking(): void
+    }
+
+    class "<<Representation>>\nBooking" as RepresentationBooking {
+        -bookingDate
+        -user
+        -car
+        -createdAt
+
+    }
+
+}
+
+carRental ..> ResourceCars:"/Cars\n<<Path>>"
+ResourceCars ..> ResourceCar: "/{CarId}\n<<Path>>"
+ResourceCar ..> RepresentationCar: "<<use>>"
+
+carRental ..> ResourceBookings:"/Bookings\n<<Path>>"
+ResourceBookings ..> ResourceBooking: "/{BookingId}\n<<Path>>"
+ResourceBooking ..> RepresentationBooking: "<<use>>"
+@enduml
